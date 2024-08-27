@@ -14,9 +14,7 @@ public class CsvService {
 
     public boolean createCSV() {
         // TODO: Move to application.properties
-        csvHelper.generateCSV(10);
-
-        return true;
+        return csvHelper.generateCSV(10);
     }
 
     public boolean validateCSVFields() {
