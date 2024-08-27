@@ -1,16 +1,19 @@
 package com.sprashanthv.nodeanalysis.helpers;
 
-import com.sprashanthv.nodeanalysis.enums.NodeType;
-import com.sprashanthv.nodeanalysis.model.Node;
 import org.springframework.stereotype.Component;
 
+import com.sprashanthv.nodeanalysis.enums.NodeHeaders;
+import com.sprashanthv.nodeanalysis.enums.NodeType;
+import com.sprashanthv.nodeanalysis.model.Node;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
 public class CsvHelper {
 
-    public boolean generateCSV(int noOfRecords) {
+    public List<Node> generateNodeRecords(int noOfRecords) {
 
         List<Node> nodes = new ArrayList<>();
 
@@ -19,11 +22,30 @@ public class CsvHelper {
             nodes.add(node);
         }
 
-        return nodes.size() == noOfRecords;
+        return nodes;
     }
 
     public boolean validateFields() {
         return true;
+    }
+
+    public String[] getAllHeaderValues() {
+        return Arrays.stream(NodeHeaders.values())
+                .map(NodeHeaders::getValue)
+                .toArray(String[]::new);
+    }
+
+    public String[] getEachRow(Node node) {
+        return new String[]{
+                node.getId(),
+                node.getName(),
+                node.getDescription(),
+                node.getMemo(),
+                node.getType(),
+                node.getParentGroupName(),
+                node.getParentGroupId(),
+                node.getParentName()
+        };
     }
 
     private Node setupNode(int nodeId) {
