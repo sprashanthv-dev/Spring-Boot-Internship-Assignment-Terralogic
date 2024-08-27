@@ -1,0 +1,69 @@
+package com.sprashanthv.nodeanalysis.service;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import com.opencsv.CSVWriter;
+
+import com.sprashanthv.nodeanalysis.helpers.CsvHelper;
+import com.sprashanthv.nodeanalysis.model.Node;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.List;
+
+//TODO: Move @Value annotations to a Config class?
+@Service
+public class CsvService {
+
+    private final CsvHelper csvHelper;
+
+    @Value("${csv.path}")
+    private String csvPath;
+
+    @Value("${csv.file.name}")
+    private String csvFileName;
+
+    @Value("${csv.max.records}")
+    private int csvMaxRecords;
+
+    public CsvService(CsvHelper csvHelper) {
+        this.csvHelper = csvHelper;
+    }
+
+    public boolean createCSV() throws IOException {
+        // TODO: Move to application.properties - noOfRecords
+        List<Node> nodes = this.csvHelper.generateNodeRecords(csvMaxRecords);
+        String path = Paths.get(csvPath, csvFileName).toString();
+
+        try {
+            this.convertNodeObjectsToCSV(path, nodes);
+            System.out.println("Csv file of " + csvMaxRecords + " records written to " + path + " successfully!");
+        } catch (IOException e) {
+            System.out.println("Error occurred while creating csv " + e.getMessage());
+            return false;
+        }
+
+        return true;
+    }
+
+    public boolean validateCSVFields() {
+        return true;
+    }
+
+    private void convertNodeObjectsToCSV(String filePath, List<Node> nodes) throws IOException {
+
+        String[] headers = this.csvHelper.getAllHeaderValues();
+
+        try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
+            // Csv header information
+            writer.writeNext(headers);
+
+            // Csv data
+            for (Node node : nodes) {
+                String[] row = this.csvHelper.getEachRow(node);
+                writer.writeNext(row);
+            }
+        }
+    }
+}
