@@ -10,6 +10,10 @@ public class Node {
     private String parentGroupId;
     private String parentName;
 
+    public Node() {
+
+    }
+
     public String getId() {
         return id;
     }
@@ -72,5 +76,19 @@ public class Node {
 
     public void setParentName(String parentName) {
         this.parentName = parentName;
+    }
+
+    @Override
+    public String toString() {
+        return "Node{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", memo='" + memo + '\'' +
+                ", type='" + type + '\'' +
+                ", parentGroupName='" + parentGroupName + '\'' +
+                ", parentGroupId='" + parentGroupId + '\'' +
+                ", parentName='" + parentName + '\'' +
+                '}';
     }
 }
