@@ -19,6 +19,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * This class handles all CSV related operations:
+ * 1) Creating CSV from List<Node> objects
+ * 2) Importing CSV to the database
+ * 3) Reading CSV and converting it back to List<Node> objects
+ */
 @Service
 public class CsvService {
 
@@ -67,10 +73,12 @@ public class CsvService {
     }
 
     public boolean importCSVToDatabase() {
+        // Reads the CSV file present at the configured location
         List<Node> nodes = this.readCSV();
-
         if (!nodes.isEmpty()) {
             try {
+                // Checks if database already has records from the CSV
+                // If it does, skips import
                 Iterable<Node> nodeIterable = this.nodeRepository.findAll();
 
                 if (!nodeIterable.iterator().hasNext()) {

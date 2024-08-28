@@ -35,6 +35,7 @@ public class NodeAnalysisApplication implements CommandLineRunner {
         try {
             Path path = Paths.get(csvDirPath, csvFileName);
 
+            // Checks if csv file exists at the path, if not generates it with random seeded values
             if (!Files.exists(path)) {
                 logger.log(Level.INFO, "CSV file does not exist locally. Creating it at --> " + path);
                 boolean csvResult = this.csvService.createCSV();
@@ -48,6 +49,7 @@ public class NodeAnalysisApplication implements CommandLineRunner {
                 logger.log(Level.INFO, "CSV file already exists");
             }
 
+            // Imports the csv into the H2 database
 			boolean importResult = this.csvService.importCSVToDatabase();
 
 			if (!importResult) {
