@@ -25,5 +25,6 @@ public class NodeAnalysisApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 //		this.csvService.createCSV();
 //		List<Node> nodes = this.csvService.readCSV();
+		this.csvService.importCSVToDatabase();
 	}
 }
