@@ -1,25 +1,50 @@
 package com.sprashanthv.nodeanalysis.model;
 
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Table;
+
+import jakarta.validation.constraints.NotEmpty;
+
+import com.opencsv.bean.CsvBindByName;
+
+@Table("NODE")
 public class Node {
-    private String id;
+    @Id
+    private Integer id;
+    @CsvBindByName(column = "nodeId")
+    private String nodeId;
+    @CsvBindByName(column = "name")
+    @NotEmpty
     private String name;
+    @CsvBindByName(column = "description")
+    @NotEmpty
     private String description;
+    @CsvBindByName(column = "memo")
+    @NotEmpty
     private String memo;
+    @CsvBindByName(column = "type")
+    @NotEmpty
     private String type;
+    @CsvBindByName(column = "parentGroupName")
+    @NotEmpty
     private String parentGroupName;
+    @CsvBindByName(column = "parentGroupId")
+    @NotEmpty
     private String parentGroupId;
+    @CsvBindByName(column = "parentName")
+    @NotEmpty
     private String parentName;
 
     public Node() {
 
     }
 
-    public String getId() {
-        return id;
+    public String getNodeId() {
+        return nodeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 
     public String getName() {

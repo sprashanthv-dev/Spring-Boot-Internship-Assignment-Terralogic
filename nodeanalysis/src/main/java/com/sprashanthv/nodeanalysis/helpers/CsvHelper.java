@@ -37,7 +37,7 @@ public class CsvHelper {
 
     public String[] getEachRow(Node node) {
         return new String[]{
-                node.getId(),
+                node.getNodeId(),
                 node.getName(),
                 node.getDescription(),
                 node.getMemo(),
@@ -54,7 +54,7 @@ public class CsvHelper {
         // TODO: Move this to a constants file ?
         int groupId = (nodeId % 3) + 1;
 
-        node.setId("T" + (nodeId + 1));
+        node.setNodeId("T" + (nodeId + 1));
         node.setName("Node " + (nodeId + 1));
         node.setDescription("Node " + (nodeId + 1) + " description");
         node.setMemo("Node " + (nodeId + 1) + " memo");
@@ -71,5 +71,4 @@ public class CsvHelper {
 
         return node;
     }
-
 }

@@ -20,6 +20,7 @@ public class NodeAnalysisApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.csvService.createCSV();
+//		this.csvService.createCSV();
+//		this.csvService.importCSVToDatabase();
 	}
 }
