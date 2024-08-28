@@ -1,14 +1,12 @@
-package com.sprashanthv.nodeanalysis.helpers;
+package com.sprashanthv.nodeanalysis.response;
 
-public class ApiResponse<T> {
+public class ErrorResponse {
     private String status;
     private String error;
-    private T data;
 
-    public ApiResponse(String status, String error, T data) {
+    public ErrorResponse(String status, String error) {
         this.status = status;
         this.error = error;
-        this.data = data;
     }
 
     public String getStatus() {
@@ -25,13 +23,5 @@ public class ApiResponse<T> {
 
     public void setError(String error) {
         this.error = error;
-    }
-
-    public T getData() {
-        return data;
-    }
-
-    public void setData(T data) {
-        this.data = data;
     }
 }
