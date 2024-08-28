@@ -15,7 +15,6 @@ import com.sprashanthv.nodeanalysis.model.Node;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +43,14 @@ public class CsvService {
         this.nodeRepository = nodeRepository;
     }
 
+    public String getCsvPath() {
+        return csvPath;
+    }
+
+    public String getCsvFileName() {
+        return csvFileName;
+    }
+
     public boolean createCSV() {
         List<Node> nodes = this.csvHelper.generateNodeRecords(csvMaxRecords);
         String path = Paths.get(csvPath, csvFileName).toString();
@@ -64,34 +71,33 @@ public class CsvService {
 
         if (!nodes.isEmpty()) {
             try {
+                Iterable<Node> nodeIterable = this.nodeRepository.findAll();
 
-                nodeRepository.saveAll(nodes);
+                if (!nodeIterable.iterator().hasNext()) {
+                    logger.log(Level.INFO, "No records exist in the table, seeding table now");
 
-                logger.log(Level.INFO, "Successfully inserted " + nodes.size() + " csv records into the database!");
-            } catch (DataIntegrityViolationException e) {
-                logger.log(Level.SEVERE, "Error while importing csv to database " + e.getMessage());
-                return false;
+                    nodeRepository.saveAll(nodes);
+                    logger.log(Level.INFO, "Successfully inserted " + nodes.size() + " csv records into the database!");
+                } else {
+                    logger.log(Level.INFO, "Table has existing records, skipping import");
+                }
             } catch (Exception e) {
                 logger.log(Level.SEVERE, "Unknown error occurred while importing csv to database " + e.getMessage());
                 return false;
             }
         } else {
-            logger.log(Level.SEVERE, "No records present in the CSV to insert");
+            logger.log(Level.SEVERE, "No records present in the CSV to insert (or) error in reading the CSV file");
             return false;
         }
 
         return true;
     }
 
-    public boolean validateCSVFields() {
-        return true;
-    }
-
     private List<Node> readCSV() {
         List<Node> nodes = new ArrayList<>();
-        String path = Paths.get(csvPath, csvFileName).toString();
 
         try {
+            String path = Paths.get(csvPath, csvFileName).toString();
             nodes = this.csvMapper.convertCSVToNodeObjects(path);
             logger.log(Level.INFO, "Csv file of " + csvMaxRecords + " records converted to " + nodes.size() + " node objects successfully!");
         } catch (IOException e) {
