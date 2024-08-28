@@ -1,7 +1,6 @@
 package com.sprashanthv.nodeanalysis.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 import jakarta.validation.constraints.NotEmpty;
@@ -10,9 +9,10 @@ import com.opencsv.bean.CsvBindByName;
 
 @Table("NODE")
 public class Node {
-    @CsvBindByName(column = "id")
     @Id
-    private String id;
+    private Integer id;
+    @CsvBindByName(column = "nodeId")
+    private String nodeId;
     @CsvBindByName(column = "name")
     @NotEmpty
     private String name;
@@ -39,12 +39,12 @@ public class Node {
 
     }
 
-    public String getId() {
-        return id;
+    public String getNodeId() {
+        return nodeId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setNodeId(String nodeId) {
+        this.nodeId = nodeId;
     }
 
     public String getName() {

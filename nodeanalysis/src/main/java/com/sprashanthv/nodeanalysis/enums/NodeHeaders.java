@@ -1,7 +1,7 @@
 package com.sprashanthv.nodeanalysis.enums;
 
 public enum NodeHeaders {
-    ID("id"),
+    NODE_ID("nodeId"),
     NAME("name"),
     DESCRIPTION("description"),
     MEMO("memo"),
