@@ -3,7 +3,6 @@ package com.sprashanthv.nodeanalysis.validators;
 import org.springframework.stereotype.Component;
 
 import com.sprashanthv.nodeanalysis.model.Node;
-import org.springframework.util.StringUtils;
 
 @Component
 public class NodeValidator {
