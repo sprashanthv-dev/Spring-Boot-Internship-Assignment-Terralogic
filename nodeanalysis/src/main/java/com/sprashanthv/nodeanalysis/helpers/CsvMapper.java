@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
 
+/**
+ * This class is used for converting Java objects to CSV and vice-versa
+ */
 @Component
 public class CsvMapper {
 
@@ -22,6 +25,12 @@ public class CsvMapper {
         this.csvHelper = csvHelper;
     }
 
+    /**
+     * Takes the generated List<Node> objects and converts it into CSV
+     * @param filePath - csv file path
+     * @param nodes - Generated node objects
+     * @throws IOException - Throws IO Exception
+     */
     public void convertNodeObjectsToCSV(String filePath, List<Node> nodes) throws IOException {
 
         String[] headers = this.csvHelper.getAllHeaderValues();
@@ -40,6 +49,12 @@ public class CsvMapper {
         }
     }
 
+    /**
+     * Reads the CSV at the given path and converts it to a List<Node> objects
+     * @param filePath - csv file path
+     * @return - List<Node>
+     * @throws IOException - Exception thrown by this method
+     */
     public List<Node> convertCSVToNodeObjects(String filePath) throws IOException {
         try (Reader reader = new FileReader(filePath)) {
 

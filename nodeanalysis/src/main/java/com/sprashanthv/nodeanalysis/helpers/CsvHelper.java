@@ -25,10 +25,6 @@ public class CsvHelper {
         return nodes;
     }
 
-    public boolean validateFields() {
-        return true;
-    }
-
     public String[] getAllHeaderValues() {
         return Arrays.stream(NodeHeaders.values())
                 .map(NodeHeaders::getValue)
