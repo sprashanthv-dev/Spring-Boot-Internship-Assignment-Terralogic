@@ -1,13 +1,23 @@
 package com.sprashanthv.nodeanalysis.model;
 
+import com.opencsv.bean.CsvBindByName;
+
 public class Node {
+    @CsvBindByName(column = "id")
     private String id;
+    @CsvBindByName(column = "name")
     private String name;
+    @CsvBindByName(column = "description")
     private String description;
+    @CsvBindByName(column = "memo")
     private String memo;
+    @CsvBindByName(column = "type")
     private String type;
+    @CsvBindByName(column = "parentGroupName")
     private String parentGroupName;
+    @CsvBindByName(column = "parentGroupId")
     private String parentGroupId;
+    @CsvBindByName(column = "parentName")
     private String parentName;
 
     public Node() {
