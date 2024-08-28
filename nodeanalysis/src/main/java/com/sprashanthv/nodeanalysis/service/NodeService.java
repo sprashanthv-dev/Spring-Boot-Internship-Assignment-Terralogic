@@ -5,7 +5,6 @@ import com.sprashanthv.nodeanalysis.repository.NodeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -25,5 +24,9 @@ public class NodeService {
         }
 
         return nodes;
+    }
+
+    public Node createNode(Node node) {
+        return this.nodeRepository.save(node);
     }
 }
