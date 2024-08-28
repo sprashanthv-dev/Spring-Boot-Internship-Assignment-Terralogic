@@ -17,13 +17,13 @@ import jakarta.validation.Valid;
 import com.sprashanthv.nodeanalysis.model.Node;
 
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @RestController
 public class NodeController {
     private final NodeService nodeService;
     private final NodeValidator nodeValidator;
-
     private static final Logger logger = Logger.getLogger(NodeController.class.getName());
 
     public NodeController(NodeService nodeService, NodeValidator nodeValidator) {
@@ -40,6 +40,8 @@ public class NodeController {
             response = new ApiResponse<>(HttpStatus.OK.name(), null, nodes);
             return new ResponseEntity<>(response, HttpStatus.OK);
         } catch (Exception e) {
+            logger.log(Level.SEVERE, e.getMessage());
+
             response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.name(),
                     "Unknown error occurred",
                     null);
@@ -67,6 +69,9 @@ public class NodeController {
                 return new ResponseEntity<>(response, HttpStatus.CREATED);
             }
         } catch (Exception e) {
+
+            logger.log(Level.SEVERE, e.getMessage());
+
             response = new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.name(),
                     "Unknown error occurred while creating a node",
                     null);

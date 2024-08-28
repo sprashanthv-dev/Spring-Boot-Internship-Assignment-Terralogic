@@ -1,10 +1,10 @@
 package com.sprashanthv.nodeanalysis.response;
 
-public class ApiErrorResponse {
+public class ErrorResponse {
     private String status;
     private String error;
 
-    public ApiErrorResponse(String status, String error) {
+    public ErrorResponse(String status, String error) {
         this.status = status;
         this.error = error;
     }
