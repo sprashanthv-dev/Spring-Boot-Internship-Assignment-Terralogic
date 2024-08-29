@@ -61,7 +61,6 @@ public class NodeAnalysisApplication implements CommandLineRunner {
 
         } catch (Exception e) {
 			logger.log(Level.SEVERE, "CSV File Path not found");
-			throw new RuntimeException("CSV File Path not found!");
 		}
     }
 }
