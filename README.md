@@ -7,6 +7,8 @@ Repository containing the implementation of the assignment requirements as part 
 1) Spring Boot
 2) Maven for dependency management
 3) H2 for database operations
+4) OpenCSV for CSV Parsing
+5) JUnit + Mockito for Unit Testing
 
 #### Summary
 Spring Boot Web Application that generates a CSV containing node information with 10,000 records (configurable), imports it into H2 database and provides the ability to fetch all node information and to create new nodes.
@@ -20,3 +22,4 @@ Spring Boot Web Application that generates a CSV containing node information wit
 6) While adding new node information, the request body is validated through custom `NodeValidator` class
 7) A `GlobalExceptionHandler` class handles all exceptions in the application that propagates from the repository to the controller layer.
 8) Custom Response formatter classes `ApiResponse` and `ErrorResponse` are used to send back `JSON` responses to the client.
+9) Unit Tests for `NodeRepository` and `NodeService` classes
